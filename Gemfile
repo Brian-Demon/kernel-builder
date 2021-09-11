@@ -57,3 +57,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # GitHub OAuth Gem
 gem 'omniauth-github', '~> 2.0.0'
+# Omniauth rails csrf protection gem
+gem 'omniauth-rails_csrf_protection'
