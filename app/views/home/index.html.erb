@@ -3,6 +3,7 @@
 <% if current_user %>
   <h3>Logged in as: <%= current_user.username %></h3>
   <%= button_to "Logout", logout_path, method: :get %>
+  <%= button_to "Create New Kernel", new_kernel_source_path, method: :get%>
 <% else %>
   <%= button_to "Login with GitHub", "/auth/github" %>
 <% end %>
