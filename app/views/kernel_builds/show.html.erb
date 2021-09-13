@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Kernel:</strong>
+  <%= @kernel_build.kernel_id %>
+</p>
+
+<p>
+  <strong>Config:</strong>
+  <%= @kernel_build.config_id %>
+</p>
+
+<p>
+  <strong>Artifact url:</strong>
+  <%= @kernel_build.artifact_url %>
+</p>
+
+<%= link_to 'Edit', edit_kernel_build_path(@kernel_build) %> |
+<%= link_to 'Back', kernel_builds_path %>

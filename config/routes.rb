@@ -4,10 +4,11 @@ Rails.application.routes.draw do
   # ROOT
   root to: "home#index"
 
-  #OAUTH
+  # OAUTH
   get "/auth/:provider/callback" => "sessions#create"
   get "/logout" => "sessions#destroy", :as => :logout
 
   # RESOURCES
+  resources :kernel_builds
   resources :users
 end
