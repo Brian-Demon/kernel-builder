@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Kernel Sources</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Git repo</th>
+      <th>Git ref</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @kernel_sources.each do |kernel_source| %>
+      <tr>
+        <td><%= kernel_source.git_repo %></td>
+        <td><%= kernel_source.git_ref %></td>
+        <td><%= link_to 'Show', kernel_source %></td>
+        <td><%= link_to 'Edit', edit_kernel_source_path(kernel_source) %></td>
+        <td><%= link_to 'Destroy', kernel_source, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Kernel Source', new_kernel_source_path %>
