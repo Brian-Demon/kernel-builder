@@ -1,0 +1,22 @@
+<%= form_with(model: kernel_config) do |form| %>
+  <% if kernel_config.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(kernel_config.errors.count, "error") %> prohibited this kernel_config from being saved:</h2>
+
+      <ul>
+        <% kernel_config.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :config_url %>
+    <%= form.file_field :config_url %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
