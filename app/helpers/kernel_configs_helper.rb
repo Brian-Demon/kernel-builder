@@ -1,0 +1,2 @@
+module KernelConfigsHelper
+end
