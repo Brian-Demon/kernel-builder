@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  has_one: :kernel_config
+  has_many :kernel_configs
   
   def self.create_with_omniauth(auth)
     create! do |user|
