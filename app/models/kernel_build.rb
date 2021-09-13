@@ -1,4 +1,4 @@
 class KernelBuild < ApplicationRecord
-  has_one: :kernel_config
-  has_one: :kernel_source
+  has_many: :kernel_configs
+  has_many: :kernel_sources
 end
