@@ -1,0 +1,32 @@
+<%= form_with(model: kernel_build) do |form| %>
+  <% if kernel_build.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(kernel_build.errors.count, "error") %> prohibited this kernel_build from being saved:</h2>
+
+      <ul>
+        <% kernel_build.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :kernel_id %>
+    <%= form.number_field :kernel_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :config_id %>
+    <%= form.number_field :config_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :artifact_url %>
+    <%= form.text_field :artifact_url %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

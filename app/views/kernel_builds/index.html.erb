@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Kernel Builds</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Kernel</th>
+      <th>Config</th>
+      <th>Artifact url</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @kernel_builds.each do |kernel_build| %>
+      <tr>
+        <td><%= kernel_build.kernel_id %></td>
+        <td><%= kernel_build.config_id %></td>
+        <td><%= kernel_build.artifact_url %></td>
+        <td><%= link_to 'Show', kernel_build %></td>
+        <td><%= link_to 'Edit', edit_kernel_build_path(kernel_build) %></td>
+        <td><%= link_to 'Destroy', kernel_build, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Kernel Build', new_kernel_build_path %>
