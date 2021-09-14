@@ -1,5 +1,7 @@
 class KernelSourcesController < ApplicationController
   before_action :set_kernel_source, only: %i[ show edit update destroy ]
+  validate_uniqueness_of :git_repo
+  validate_uniqueness_of :git_ref
 
   # GET /kernel_sources or /kernel_sources.json
   def index
@@ -21,11 +23,11 @@ class KernelSourcesController < ApplicationController
 
   # POST /kernel_sources or /kernel_sources.json
   def create
-    @kernel_source = KernelSource.new(kernel_source_params)
+    @kernel_source = KernelSource.new(user_id: current_user.id, git_repo: kernel_source_params[:git_repo], git_ref: kernel_source_params[:git_ref])
 
     respond_to do |format|
       if @kernel_source.save
-        format.html { redirect_to @kernel_source, notice: "Kernel source was successfully created." }
+        format.html { redirect_to root_path, notice: "Kernel source was successfully created." }
         format.json { render :show, status: :created, location: @kernel_source }
       else
         format.html { render :new, status: :unprocessable_entity }
