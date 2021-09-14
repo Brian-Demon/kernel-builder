@@ -21,7 +21,7 @@ class KernelConfigsController < ApplicationController
 
   # POST /kernel_configs or /kernel_configs.json
   def create
-    @kernel_config = KernelConfig.new(kernel_config_params)
+    @kernel_config = KernelConfig.new(user_id: current_user.id, config_url: params[:config_url])
 
     respond_to do |format|
       if @kernel_config.save
