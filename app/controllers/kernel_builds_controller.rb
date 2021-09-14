@@ -13,10 +13,14 @@ class KernelBuildsController < ApplicationController
   # GET /kernel_builds/new
   def new
     @kernel_build = KernelBuild.new
+    @current_user_kernel_configs ||= current_user.kernel_configs.all.uniq
+    @current_user_kernel_sources ||= KernelSource.where(user_id: current_user.id).uniq
   end
 
   # GET /kernel_builds/1/edit
   def edit
+    @current_user_kernel_configs ||= current_user.kernel_configs.all.uniq
+    @current_user_kernel_sources ||= KernelSource.where(user_id: current_user.id).uniq
   end
 
   # POST /kernel_builds or /kernel_builds.json
@@ -64,6 +68,6 @@ class KernelBuildsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def kernel_build_params
-      params.require(:kernel_build).permit(:kernel_id, :config_id, :artifact_url)
+      params.require(:kernel_build).permit(:kernel_id, :config_id, :artifact_url, kernel_configs_attributes: [:config_url], kernel_sources_attributes: [:git_repo, :git_ref])
     end
 end
