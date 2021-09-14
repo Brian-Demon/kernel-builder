@@ -10,5 +10,7 @@ Rails.application.routes.draw do
 
   # RESOURCES
   resources :kernel_builds
+  resources :kernel_configs
+  resources :kernel_sources
   resources :users
 end
