@@ -14,8 +14,8 @@ class KernelBuildsController < ApplicationController
   # GET /kernel_builds/new
   def new
     @kernel_build = KernelBuild.new
-    @current_user_kernel_configs ||= KernelConfig.where(user_id: current_user.id).distinct
-    @current_user_kernel_sources ||= KernelSource.where(user_id: current_user.id).distinct
+    @current_user_kernel_configs ||= current_user.kernel_configs.distinct
+    @current_user_kernel_sources ||= current_user.kernel_sources.distinct
   end
 
   # GET /kernel_builds/1/edit
