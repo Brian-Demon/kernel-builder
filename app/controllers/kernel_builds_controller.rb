@@ -1,4 +1,5 @@
 class KernelBuildsController < ApplicationController
+  before_action :require_user_logged_in!
   before_action :set_kernel_build, only: %i[ show edit update destroy ]
 
   # GET /kernel_builds or /kernel_builds.json
@@ -13,14 +14,14 @@ class KernelBuildsController < ApplicationController
   # GET /kernel_builds/new
   def new
     @kernel_build = KernelBuild.new
-    @current_user_kernel_configs ||= current_user.kernel_configs.all.uniq
-    @current_user_kernel_sources ||= KernelSource.where(user_id: current_user.id).uniq
+    @current_user_kernel_configs ||= KernelConfig.where(user_id: current_user.id).distinct
+    @current_user_kernel_sources ||= KernelSource.where(user_id: current_user.id).distinct
   end
 
   # GET /kernel_builds/1/edit
   def edit
-    @current_user_kernel_configs ||= current_user.kernel_configs.all.uniq
-    @current_user_kernel_sources ||= KernelSource.where(user_id: current_user.id).uniq
+    @current_user_kernel_configs ||= KernelConfig.where(user_id: current_user.id).distinct
+    @current_user_kernel_sources ||= KernelSource.where(user_id: current_user.id).distinct
   end
 
   # POST /kernel_builds or /kernel_builds.json
