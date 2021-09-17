@@ -1,7 +1,8 @@
 class KernelBuildsController < ApplicationController
   before_action :require_user_logged_in!
   before_action :set_kernel_build, only: %i[ show edit update destroy ]
-  before_action :set_collections
+  before_action :set_user_kernel_configs
+  before_action :set_user_kernel_sources
 
   # GET /kernel_builds or /kernel_builds.json
   def index
@@ -70,8 +71,11 @@ class KernelBuildsController < ApplicationController
     end
 
     # Set collections for kernel_sources and kernel_configs
-    def set_collections
+    def set_user_kernel_configs
       @current_user_kernel_configs ||= current_user.kernel_configs.distinct
+    end
+
+    def set_user_kernel_sources
       @current_user_kernel_sources ||= current_user.kernel_sources.distinct
     end
 end
