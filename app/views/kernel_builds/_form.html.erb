@@ -12,18 +12,35 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :kernel_id %>
-    <%= form.number_field :kernel_id %>
+    <%= form.label :config_url %>
+    <%= form.collection_select :kernel_config, @current_user_kernel_configs, :id, :config_url, prompt: "-- Select config file --" %>
+  </div>
+
+  <div class="field" id="kernel_config_form">
+    <%= form.label :config_url %>
+    <%= form.file_field :config_url %>
   </div>
 
   <div class="field">
-    <%= form.label :config_id %>
-    <%= form.number_field :config_id %>
+    <%= form.label :git_repo %>
+    <%= form.collection_select :kernel_source, @current_user_kernel_sources, :id, :git_repo, prompt: "-- Select Git Repo --" %>
   </div>
 
   <div class="field">
-    <%= form.label :artifact_url %>
-    <%= form.text_field :artifact_url %>
+    <%= form.label :git_ref %>
+    <%= form.collection_select :kernel_source, @current_user_kernel_sources, :id, :git_ref, prompt: "-- Select Git Ref --" %>
+  </div>
+
+  <div id="kernel_source_form">
+    <div class="field">
+      <%= form.label :git_repo %>
+      <%= form.text_field :git_repo %>
+    </div>
+
+    <div class="field">
+      <%= form.label :git_ref %>
+      <%= form.text_field :git_ref %>
+    </div>
   </div>
 
   <div class="actions">

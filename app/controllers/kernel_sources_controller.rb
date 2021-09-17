@@ -21,11 +21,9 @@ class KernelSourcesController < ApplicationController
 
   # POST /kernel_sources or /kernel_sources.json
   def create
-    @kernel_source = KernelSource.new(kernel_source_params)
-
     respond_to do |format|
-      if @kernel_source.save
-        format.html { redirect_to @kernel_source, notice: "Kernel source was successfully created." }
+      if @kernel_source = KernelSource.find_or_create_by(user: current_user, git_ref: params[:git_ref], git_repo: params[:git_repo])
+        format.html { redirect_to root_path, notice: "Kernel source was successfully created." }
         format.json { render :show, status: :created, location: @kernel_source }
       else
         format.html { render :new, status: :unprocessable_entity }
