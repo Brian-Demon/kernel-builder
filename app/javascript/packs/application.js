@@ -26,4 +26,39 @@ const toggleFormVisibility = (form, target) => {
 window.addEventListener("load", () => {
   toggleFormVisibility(document.getElementById("kernel_config_form"), document.getElementById("show_new_config_form"));
   toggleFormVisibility(document.getElementById("kernel_source_form"), document.getElementById("show_new_source_form"));
+
+  const addNewConfigFileButton = document.getElementById("add_new_config_file");
+  addNewConfigFileButton.addEventListener("click", (e) => {
+    handleCreateNewConfig();
+  });
+
+  const addNewSourceButton = document.getElementById("add_new_kernel_source");
+  addNewSourceButton.addEventListener("click", (e) => {
+    handleCreateNewSource();
+  });
 });
+
+const handleCreateNewConfig = () => {
+  const newConfigFileFieldValue = document.getElementById("new_config_file").value;
+
+  if( newConfigFileFieldValue == "" ){
+    console.log("No file uploaded. Please upload a file to continue.")
+  } else {
+    console.log("New Config File: " + newConfigFileFieldValue);
+    window.location.reload();
+  }
+}
+
+const handleCreateNewSource = () => {
+  const NewGitRepoFieldValue = document.getElementById("new_git_repo").value;
+  const NewGitRefFieldValue = document.getElementById("new_git_ref").value;
+
+  if( NewGitRepoFieldValue == "" || NewGitRefFieldValue == "" ){
+    console.log("Please enter both a git repo and git ref to continue.")
+  } else {
+    console.log("New Kernel Source Info: ");
+    console.log("Git Repo: " + NewGitRepoFieldValue);
+    console.log("Git Ref: " + NewGitRefFieldValue);
+    window.location.reload();
+  }
+}
