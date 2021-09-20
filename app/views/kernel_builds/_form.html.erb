@@ -19,7 +19,8 @@
 
   <div class="field" id="kernel_config_form">
     <%= form.label :config_url %>
-    <%= form.file_field :config_url %>
+    <%= form.file_field :config_url, id: "new_config_file" %>
+    <%= button_tag "Add New Config File", type: "button", id: "add_new_config_file" %>
   </div>
 
   <div class="field">
@@ -36,12 +37,13 @@
   <div id="kernel_source_form">
     <div class="field">
       <%= form.label :git_repo %>
-      <%= form.text_field :git_repo %>
+      <%= form.text_field :git_repo, id: "new_git_repo" %>
     </div>
 
     <div class="field">
       <%= form.label :git_ref %>
-      <%= form.text_field :git_ref %>
+      <%= form.text_field :git_ref, id: "new_git_ref" %>
+      <%= button_tag "Add New Kernel Source", type: "button", id: "add_new_kernel_source" %>
     </div>
   </div>
 
