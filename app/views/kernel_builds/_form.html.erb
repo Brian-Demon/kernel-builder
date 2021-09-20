@@ -14,6 +14,7 @@
   <div class="field">
     <%= form.label :config_url %>
     <%= form.collection_select :kernel_config, @current_user_kernel_configs, :id, :config_url, prompt: "-- Select config file --" %>
+    <%= button_tag "Upload New Kernel Config", type: "button", id: "show_new_config_form" %>
   </div>
 
   <div class="field" id="kernel_config_form">
@@ -29,6 +30,7 @@
   <div class="field">
     <%= form.label :git_ref %>
     <%= form.collection_select :kernel_source, @current_user_kernel_sources, :id, :git_ref, prompt: "-- Select Git Ref --" %>
+    <%= button_tag "Create New Kernel Source", type: "button", id: "show_new_source_form" %>
   </div>
 
   <div id="kernel_source_form">

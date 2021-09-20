@@ -11,3 +11,19 @@ import "channels"
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+
+const toggleFormVisibility = (form, target) => {
+  form.style.display = "none";
+  target.addEventListener("click", (e) => {
+    if( form.style.display == "none" ){
+      form.style.display = "block";
+    } else {
+      form.style.display = "none";
+    }
+  });
+}
+
+window.addEventListener("load", () => {
+  toggleFormVisibility(document.getElementById("kernel_config_form"), document.getElementById("show_new_config_form"));
+  toggleFormVisibility(document.getElementById("kernel_source_form"), document.getElementById("show_new_source_form"));
+});
