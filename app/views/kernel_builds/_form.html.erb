@@ -14,7 +14,7 @@
   <div class="field">
     <%= form.label :config_url %>
     <%= form.collection_select :kernel_config, @current_user_kernel_configs, :id, :config_url, prompt: "-- Select config file --" %>
-    <%= button_tag "Upload New Kerenel Config", type: "button", id: "show_new_config_form" %>
+    <%= button_tag "Upload New Kernel Config", type: "button", id: "show_new_config_form" %>
   </div>
 
   <div class="field" id="kernel_config_form">
