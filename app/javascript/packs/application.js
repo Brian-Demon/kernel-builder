@@ -12,18 +12,43 @@ Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
 
-const toggleFormVisibility = (form, target) => {
+const toggleFormVisibility = (dropdownParam, formParam, dropdownButtonParam, formButtonParam) => {
+  const dropdown = dropdownParam;
+  const form = formParam;
+  const dropdownButton = dropdownButtonParam;
+  const formButton = formButtonParam;
+  
+  dropdown.style.display = "block";
   form.style.display = "none";
-  target.addEventListener("click", (e) => {
-    if( form.style.display == "none" ){
-      form.style.display = "block";
-    } else {
-      form.style.display = "none";
-    }
+  formButton.style.display = "block";
+  dropdownButton.style.display = "none";
+
+  dropdownButton.addEventListener("click", (e) => {
+    formButton.style.display = "block";
+    dropdown.style.display = "block";
+    form.style.display = "none";
+    dropdownButton.style.display = "none";
+  });
+
+  formButton.addEventListener("click", (e) => {
+    dropdownButton.style.display = "block";
+    form.style.display = "block";
+    dropdown.style.display = "none";
+    formButton.style.display = "none";
   });
 }
 
 window.addEventListener("load", () => {
-  toggleFormVisibility(document.getElementById("kernel_config_form"), document.getElementById("show_new_config_form"));
-  toggleFormVisibility(document.getElementById("kernel_source_form"), document.getElementById("show_new_source_form"));
+  toggleFormVisibility(
+    document.getElementById("config_dropdown_form"),
+    document.getElementById("kernel_config_form"),
+    document.getElementById("show_config_dropdown"),
+    document.getElementById("show_new_config_form")
+  );
+  toggleFormVisibility(
+    document.getElementById("source_dropdown_forms"),
+    document.getElementById("kernel_source_form"),
+    document.getElementById("show_source_dropdown"),
+    document.getElementById("show_new_source_form")
+  );
 });
