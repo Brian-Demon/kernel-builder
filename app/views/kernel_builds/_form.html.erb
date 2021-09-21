@@ -1,7 +1,7 @@
 <%= form_with(model: kernel_build) do |form| %>
   <% if kernel_build.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(kernel_build.errors.count, "error") %> prohibited this kernel_build from being saved:</h2>
+      <h2>ERROR: <%= pluralize(kernel_build.errors.count, "error") %></h2>
 
       <ul>
         <% kernel_build.errors.each do |error| %>
@@ -11,26 +11,49 @@
     </div>
   <% end %>
 
-  <div class="field">
+
+  <div class="field", id="config_dropdown_form">
     <%= form.label :config_url %>
-    <%= form.collection_select :kernel_config, @current_user_kernel_configs, :id, :config_url, prompt: "-- Select config file --" %>
-    <%= button_tag "Upload New Kernel Config", type: "button", id: "show_new_config_form" %>
+    <%= collection_select :kernel_config,
+      :kernel_url,
+      @current_user_kernel_configs,
+      :id,
+      :config_url,
+      prompt: "-- Select config file --"
+    %>
+    <%= button_tag "Upload New Kernel Config",type: "button", id: "show_new_config_form" %>
   </div>
 
   <div class="field" id="kernel_config_form">
     <%= form.label :config_url %>
     <%= form.file_field :config_url %>
+    <%= button_tag "Select Existing Kernel Config",type: "button", id: "show_config_dropdown" %>
   </div>
 
-  <div class="field">
-    <%= form.label :git_repo %>
-    <%= form.collection_select :kernel_source, @current_user_kernel_sources, :id, :git_repo, prompt: "-- Select Git Repo --" %>
-  </div>
 
-  <div class="field">
-    <%= form.label :git_ref %>
-    <%= form.collection_select :kernel_source, @current_user_kernel_sources, :id, :git_ref, prompt: "-- Select Git Ref --" %>
-    <%= button_tag "Create New Kernel Source", type: "button", id: "show_new_source_form" %>
+  <div id="source_dropdown_forms">
+    <div class="field", id="git_repo_dropdown_form" >
+      <%= form.label :git_repo %>
+      <%= collection_select :kernel_source,
+        :git_repo,
+        @current_user_kernel_sources,
+        :id,
+        :git_repo,
+        prompt: "-- Select Git Repo --"
+      %>
+    </div>
+
+    <div class="field", id="git_ref_dropdown_form" >
+      <%= form.label :git_ref %>
+      <%= collection_select :kernel_source,
+        :git_ref,
+        @current_user_kernel_sources,
+        :id,
+        :git_ref,
+        prompt: "-- Select Git Ref --"
+      %>
+      <%= button_tag "Create New Kernel Source", type: "button", id: "show_new_source_form" %>
+    </div>
   </div>
 
   <div id="kernel_source_form">
@@ -43,6 +66,7 @@
       <%= form.label :git_ref %>
       <%= form.text_field :git_ref %>
     </div>
+    <%= button_tag "Select Existing Kernel Source",type: "button", id: "show_source_dropdown" %>
   </div>
 
   <div class="actions">
