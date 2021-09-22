@@ -15,8 +15,8 @@
   <tbody>
     <% @kernel_builds.each do |kernel_build| %>
       <tr>
-        <td><%= kernel_build.kernel_id %></td>
-        <td><%= kernel_build.config_id %></td>
+        <td><%= kernel_build.kernel_source_id %></td>
+        <td><%= kernel_build.kernel_config_id %></td>
         <td><%= kernel_build.artifact_url %></td>
         <td><%= link_to 'Show', kernel_build %></td>
         <td><%= link_to 'Edit', edit_kernel_build_path(kernel_build) %></td>
