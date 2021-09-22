@@ -24,7 +24,27 @@ class KernelBuildsController < ApplicationController
 
   # POST /kernel_builds or /kernel_builds.json
   def create
-    @kernel_build = KernelBuild.new(kernel_build_params)
+    if params["kernel_config"]["id"].present?
+      kernel_config = KernelConfig.find(params["kernel_config"]["id"])
+    else
+      config_url = params["kernel_build"]["config_url"]
+      kernel_config = KernelConfig.new(config_url: config_url, user: current_user)
+    end
+
+    if params["kernel_source"]["id"].present?
+      kernel_source = KernelSource.find(params["kernel_source"]["id"])
+    else
+      git_repo = params["kernel_build"]["git_repo"]
+      git_ref = params["kernel_build"]["git_ref"]
+      kernel_source = KernelSource.new(git_repo: git_repo, git_ref: git_ref, user: current_user)
+    end
+
+    # @kernel_build = KernelBuild.new(kernel_build_params)
+    @kernel_build = KernelBuild.new(
+      user: current_user,
+      kernel_config: kernel_config,
+      kernel_source: kernel_source,
+    )
 
     respond_to do |format|
       if @kernel_build.save
