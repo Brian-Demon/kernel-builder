@@ -46,7 +46,7 @@ window.addEventListener("load", () => {
     document.getElementById("show_new_config_form")
   );
   toggleFormVisibility(
-    document.getElementById("source_dropdown_forms"),
+    document.getElementById("source_dropdown_form"),
     document.getElementById("kernel_source_form"),
     document.getElementById("show_source_dropdown"),
     document.getElementById("show_new_source_form")
