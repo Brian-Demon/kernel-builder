@@ -153,7 +153,7 @@ class KernelBuildTest < ActiveSupport::TestCase
     kernel_build = kernelBuild(@user, kernel_config, nil)
     kernel_build.save
 
-    assert kernel_build.valid?
+    refute kernel_build.valid?
     assert kernel_build.errors[:body].empty?
 
     assert_equal 0, KernelConfig.count
@@ -173,7 +173,7 @@ class KernelBuildTest < ActiveSupport::TestCase
     kernel_build = kernelBuild(@user, nil, kernel_source)
     kernel_build.save
 
-    assert kernel_build.valid?
+    refute kernel_build.valid?
     assert kernel_build.errors[:body].empty?
 
     assert_equal 0, KernelConfig.count
@@ -185,7 +185,7 @@ class KernelBuildTest < ActiveSupport::TestCase
     kernel_build = kernelBuild(@user, nil, nil)
     kernel_build.save
 
-    assert kernel_build.valid?
+    refute kernel_build.valid?
     assert kernel_build.errors[:body].empty?
 
     assert_equal 0, KernelConfig.count
