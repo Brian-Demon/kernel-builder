@@ -15,8 +15,8 @@ class KernelBuildsTest < ApplicationSystemTestCase
     click_on "New Kernel Build"
 
     fill_in "Artifact url", with: @kernel_build.artifact_url
-    fill_in "Config", with: @kernel_build.config_id
-    fill_in "Kernel", with: @kernel_build.kernel_id
+    fill_in "Config", with: @kernel_build.kernel_config_id
+    fill_in "Kernel", with: @kernel_build.kernel_source_id
     click_on "Create Kernel build"
 
     assert_text "Kernel build was successfully created"
@@ -28,8 +28,8 @@ class KernelBuildsTest < ApplicationSystemTestCase
     click_on "Edit", match: :first
 
     fill_in "Artifact url", with: @kernel_build.artifact_url
-    fill_in "Config", with: @kernel_build.config_id
-    fill_in "Kernel", with: @kernel_build.kernel_id
+    fill_in "Config", with: @kernel_build.kernel_config_id
+    fill_in "Kernel", with: @kernel_build.kernel_source_id
     click_on "Update Kernel build"
 
     assert_text "Kernel build was successfully updated"

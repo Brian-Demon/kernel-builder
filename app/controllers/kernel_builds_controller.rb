@@ -87,7 +87,7 @@ class KernelBuildsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def kernel_build_params
-      params.require(:kernel_build).permit(:kernel_id, :config_id, :artifact_url, kernel_configs_attributes: [:config_url], kernel_sources_attributes: [:git_repo, :git_ref])
+      params.require(:kernel_build).permit(:kernel_source_id, :kernel_config_id, :artifact_url, kernel_configs_attributes: [:config_url], kernel_sources_attributes: [:git_repo, :git_ref])
     end
 
     # Set collections for kernel_sources and kernel_configs

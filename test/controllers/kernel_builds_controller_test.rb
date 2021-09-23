@@ -17,7 +17,7 @@ class KernelBuildsControllerTest < ActionDispatch::IntegrationTest
 
   # test "should create kernel_build" do
   #   assert_difference('KernelBuild.count') do
-  #     post kernel_builds_url, params: { kernel_build: { artifact_url: @kernel_build.artifact_url, config_id: @kernel_build.config_id, kernel_id: @kernel_build.kernel_id } }
+  #     post kernel_builds_url, params: { kernel_build: { artifact_url: @kernel_build.artifact_url, kernel_config_id: @kernel_build.kernel_config_id, kernel_source_id: @kernel_build.kernel_source_id } }
   #   end
 
   #   assert_redirected_to kernel_build_url(KernelBuild.last)
@@ -34,7 +34,7 @@ class KernelBuildsControllerTest < ActionDispatch::IntegrationTest
   # end
 
   # test "should update kernel_build" do
-  #   patch kernel_build_url(@kernel_build), params: { kernel_build: { artifact_url: @kernel_build.artifact_url, config_id: @kernel_build.config_id, kernel_id: @kernel_build.kernel_id } }
+  #   patch kernel_build_url(@kernel_build), params: { kernel_build: { artifact_url: @kernel_build.artifact_url, kernel_config_id: @kernel_build.kernel_config_id, kernel_source_id: @kernel_build.kernel_source_id } }
   #   assert_redirected_to kernel_build_url(@kernel_build)
   # end
 
