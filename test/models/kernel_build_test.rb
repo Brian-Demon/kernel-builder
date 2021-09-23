@@ -62,8 +62,16 @@ class KernelBuildTest < ActiveSupport::TestCase
     kernel_config = existingKernelConfig
     kernel_source = existingKernelSource
 
+    assert kernel_config.valid?
+    assert kernel_config.errors[:body].empty?
+    assert kernel_source.valid?
+    assert kernel_source.errors[:body].empty?
+
     kernel_build = kernelBuild(@user, kernel_config, kernel_source)
     kernel_build.save
+
+    assert kernel_build.valid?
+    assert kernel_build.errors[:body].empty?
 
     assert_equal 1, KernelConfig.count
     assert_equal 1, KernelSource.count
@@ -77,9 +85,15 @@ class KernelBuildTest < ActiveSupport::TestCase
       "e45fgh6"
     )
 
+    assert kernel_config.valid?
+    assert kernel_config.errors[:body].empty?
+    assert kernel_source.valid?
+    assert kernel_source.errors[:body].empty?
+
     kernel_build = kernelBuild(@user, kernel_config, kernel_source)
     kernel_build.save
 
+    assert kernel_build.valid?
     assert kernel_build.errors[:body].empty?
 
     assert_equal 1, KernelConfig.count
@@ -91,12 +105,15 @@ class KernelBuildTest < ActiveSupport::TestCase
     kernel_config = newKernelConfig("test_file_2.txt")
     kernel_source = existingKernelSource
 
+    assert kernel_config.valid?
     assert kernel_config.errors[:body].empty?
+    assert kernel_source.valid?
     assert kernel_source.errors[:body].empty?
 
     kernel_build = kernelBuild(@user, kernel_config, kernel_source)
     kernel_build.save
 
+    assert kernel_build.valid?
     assert kernel_build.errors[:body].empty?
 
     assert_equal 1, KernelConfig.count
@@ -111,12 +128,15 @@ class KernelBuildTest < ActiveSupport::TestCase
       "i78jkl9"
     )
 
+    assert kernel_config.valid?
     assert kernel_config.errors[:body].empty?
+    assert kernel_source.valid?
     assert kernel_source.errors[:body].empty?
 
     kernel_build = kernelBuild(@user, kernel_config, kernel_source)
     kernel_build.save
-
+    
+    assert kernel_build.valid?
     assert kernel_build.errors[:body].empty?
 
     assert_equal 1, KernelConfig.count
@@ -127,11 +147,13 @@ class KernelBuildTest < ActiveSupport::TestCase
   test "user cannot create a new kernel build with new kernel_config and no kernel_source" do
     kernel_config = newKernelConfig("test_file_4.txt")
 
+    assert kernel_config.valid?
     assert kernel_config.errors[:body].empty?
 
     kernel_build = kernelBuild(@user, kernel_config, nil)
     kernel_build.save
 
+    assert kernel_build.valid?
     assert kernel_build.errors[:body].empty?
 
     assert_equal 0, KernelConfig.count
@@ -145,11 +167,13 @@ class KernelBuildTest < ActiveSupport::TestCase
       "m01nop2"
     )
 
+    assert kernel_source.valid?
     assert kernel_source.errors[:body].empty?
 
     kernel_build = kernelBuild(@user, nil, kernel_source)
     kernel_build.save
 
+    assert kernel_build.valid?
     assert kernel_build.errors[:body].empty?
 
     assert_equal 0, KernelConfig.count
@@ -161,6 +185,7 @@ class KernelBuildTest < ActiveSupport::TestCase
     kernel_build = kernelBuild(@user, nil, nil)
     kernel_build.save
 
+    assert kernel_build.valid?
     assert kernel_build.errors[:body].empty?
 
     assert_equal 0, KernelConfig.count
