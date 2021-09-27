@@ -20,6 +20,7 @@ class KernelBuildsController < ApplicationController
 
   # GET /kernel_builds/1/edit
   def edit
+    @kernel_build = KernelBuild.find(params[:id])
   end
 
   # POST /kernel_builds or /kernel_builds.json
@@ -39,7 +40,6 @@ class KernelBuildsController < ApplicationController
       kernel_source = KernelSource.new(git_repo: git_repo, git_ref: git_ref, user: current_user)
     end
 
-    # @kernel_build = KernelBuild.new(kernel_build_params)
     @kernel_build = KernelBuild.new(
       user: current_user,
       kernel_config: kernel_config,
@@ -48,7 +48,7 @@ class KernelBuildsController < ApplicationController
 
     respond_to do |format|
       if @kernel_build.save
-        format.html { redirect_to @kernel_build, notice: "Kernel build was successfully created." }
+        format.html { redirect_to root_path, notice: "Kernel build was successfully created." }
         format.json { render :show, status: :created, location: @kernel_build }
       else
         format.html { render :new, status: :unprocessable_entity }

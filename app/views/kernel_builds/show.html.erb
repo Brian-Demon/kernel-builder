@@ -1,19 +1,6 @@
-<p id="notice"><%= notice %></p>
+<%= render 'shared/logout_button' %>
 
-<p>
-  <strong>Kernel:</strong>
-  <%= @kernel_build.kernel_source_id %>
-</p>
+<%= render 'shared/kernel_info', kernel_build: @kernel_build %>
 
-<p>
-  <strong>Config:</strong>
-  <%= @kernel_build.kernel_config_id %>
-</p>
-
-<p>
-  <strong>Artifact url:</strong>
-  <%= @kernel_build.artifact_url %>
-</p>
-
-<%= link_to 'Edit', edit_kernel_build_path(@kernel_build) %> |
-<%= link_to 'Back', kernel_builds_path %>
+<%= button_to 'Edit', edit_kernel_build_path(@kernel_build), method: :get, class: "btn btn-warning mb-2" %>
+<%= button_to 'Back', root_path, method: :get, class: "btn btn-secondary" %>

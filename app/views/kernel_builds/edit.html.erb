@@ -1,6 +1,8 @@
-<h1>Editing Kernel Build</h1>
+<%= render 'shared/logout_button' %>
 
-<%= render 'form', kernel_build: @kernel_build %>
+<h3>Current Info:<h3>
+<%= render 'shared/kernel_info', kernel_build: @kernel_build %>
+<h2>Editing Kernel Build</h2>
+<%= render 'shared/edit_form', kernel_build: @kernel_build %>
 
-<%= link_to 'Show', @kernel_build %> |
-<%= link_to 'Back', kernel_builds_path %>
+<%= button_to 'Back', root_path, method: :get, class: "btn btn-secondary" %>
