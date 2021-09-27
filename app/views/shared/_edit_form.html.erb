@@ -1,0 +1,65 @@
+<%= form_with(model: kernel_build) do |form| %>
+  <% if kernel_build.errors.any? %>
+    <div id="error_explanation">
+      <h2>ERROR: <%= pluralize(kernel_build.errors.count, "error") %></h2>
+
+      <ul>
+        <% kernel_build.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <div class="field mb-3", id="config_dropdown_form">
+    <%= form.label :config_url %>
+    <%= collection_select :kernel_config,
+      :id,
+      @current_user_kernel_configs,
+      :id,
+      :config_filename,
+      prompt: "-- Select config file --"
+    %>
+    <%= button_tag "Upload New Kernel Config",type: "button", id: "show_new_config_form", class: "btn btn-secondary mt-2" %>
+  </div>
+
+  <div class="field mb-3" id="kernel_config_form">
+    <%= form.label :config_url %>
+    <%= form.file_field :config_url %>
+    <%= button_tag "Select Existing Kernel Config",type: "button", id: "show_config_dropdown", class: "btn btn-secondary" %>
+  </div>
+
+
+  <div id="source_dropdown_form">
+    <div class="field", id="source_dropdown_form" >
+      <%= form.label :kernel_source %>
+      <%= collection_select :kernel_source,
+        :id,
+        @current_user_kernel_sources,
+        :id,
+        :display_name,
+        prompt: "-- Select Kernel Source --"
+      %>
+    </div>
+
+    <%= button_tag "Create New Kernel Source", type: "button", id: "show_new_source_form", class: "btn btn-secondary" %>
+  </div>
+
+  <div id="kernel_source_form">
+    <div class="field">
+      <%= form.label :git_repo %>
+      <%= form.text_field :git_repo %>
+    </div>
+
+    <div class="field">
+      <%= form.label :git_ref %>
+      <%= form.text_field :git_ref %>
+    </div>
+    <%= button_tag "Select Existing Kernel Source",type: "button", id: "show_source_dropdown", class: "btn btn-secondary" %>
+  </div>
+
+  <div class="actions mt-4">
+    <%= form.submit "Create Kernel Build", class: "btn btn-lg btn-primary" %>
+  </div>
+<% end %>
