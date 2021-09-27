@@ -1,14 +1,9 @@
-<h1>WELCOME TO KERNEL BUILDER!</h1>
-
 <div class="container-fluid">
   <% if current_user %>
+    <%= render 'shared/logout_button' %>
 
-  <div class="top-right-corner dropdown">
-    <%= button_to "Lougout", logout_path, class: "btn btn-lg btn-secondary", method: :get %>
-  </div>
-
-
-  <%= button_to "Create New Kernel", new_kernel_build_path, method: :get, class: "btn btn-lg btn-primary"%>
+    <%= render 'shared/kernel_table' %>
+    <%= button_to "Create New Kernel", new_kernel_build_path, method: :get, class: "btn btn-lg btn-primary"%>
   <% else %>
     <div class="top-right-corner">
       <%= button_to "Login with GitHub", "/auth/github", class: "btn btn-lg btn-primary" %>
