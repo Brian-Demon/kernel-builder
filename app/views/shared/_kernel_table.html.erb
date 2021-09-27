@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Kernel Builds</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Kernel Config</th>
+      <th scope="col">Kernel Source</th>
+      <th scope="col">Artifact url</th>
+      <th  scope="col" colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @kernel_builds.each do |kernel_build| %>
+      <tr>
+        <td scope="row"><%= kernel_build.kernel_config.config_filename %></td>
+        <td><%= kernel_build.kernel_source.display_name %></td>
+        <td><%= kernel_build.artifact_url %></td>
+        <td><%= button_to 'Edit', edit_kernel_build_path(kernel_build), method: :get, class: "btn btn-sm btn-warning" %></td>
+        <td><%= button_to 'Destroy', kernel_build, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
