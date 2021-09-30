@@ -11,55 +11,55 @@
     </div>
   <% end %>
 
-
-  <div class="field mb-3", id="config_dropdown_form">
-    <%= form.label :config_url %>
-    <%= collection_select :kernel_config,
-      :id,
-      @current_user_kernel_configs,
-      :id,
-      :config_filename,
-      prompt: "-- Select config file --"
-    %>
-    <%= button_tag "Upload New Kernel Config",type: "button", id: "show_new_config_form", class: "btn btn-secondary mt-2" %>
-  </div>
-
-  <div class="field mb-3" id="kernel_config_form">
-    <%= form.label :config_url %>
-    <%= form.file_field :config_url %>
-    <%= button_tag "Select Existing Kernel Config",type: "button", id: "show_config_dropdown", class: "btn btn-secondary" %>
-  </div>
-
-
-  <div id="source_dropdown_form">
-    <div class="field", id="source_dropdown_form" >
-      <%= form.label :kernel_source %>
-      <%= collection_select :kernel_source,
+  <%= form.fields_for :kernel_config do |config_form| %>
+    <div class="field mb-3", id="config_dropdown_form">
+      <%= config_form.label :config_url %>
+      <%= config_form.collection_select :id,
+        @current_user_kernel_configs,
         :id,
-        @current_user_kernel_sources,
-        :id,
-        :display_name,
-        prompt: "-- Select Kernel Source --"
+        :config_filename,
+        prompt: "-- Select config file --"
       %>
+      <%= button_tag "Upload New Kernel Config", type: "button", id: "show_new_config_form", class: "btn btn-secondary mt-2" %>
     </div>
 
-    <%= button_tag "Create New Kernel Source", type: "button", id: "show_new_source_form", class: "btn btn-secondary" %>
-  </div>
+    <div class="field mb-3" id="kernel_config_form">
+      <%= config_form.label :config_url %>
+      <%= config_form.file_field :config_url %>
+      <%= button_tag "Select Existing Kernel Config", type: "button", id: "show_config_dropdown", class: "btn btn-secondary mt-2" %>
+    </div>
+  <% end %>
 
-  <div id="kernel_source_form">
-    <div class="field">
-      <%= form.label :git_repo %>
-      <%= form.text_field :git_repo %>
+  <%= form.fields_for :kernel_source do |source_form| %>
+    <div id="source_dropdown_form">
+      <div class="field", id="source_dropdown_form" >
+        <%= source_form.label :kernel_source %>
+        <%= source_form.collection_select :id,
+          @current_user_kernel_sources,
+          :id,
+          :display_name,
+          prompt: "-- Select Kernel Source --"
+        %>
+      </div>
+
+      <%= button_tag "Create New Kernel Source", type: "button", id: "show_new_source_form", class: "btn btn-secondary" %>
     </div>
 
-    <div class="field">
-      <%= form.label :git_ref %>
-      <%= form.text_field :git_ref %>
+    <div id="kernel_source_form">
+      <div class="field">
+        <%= source_form.label :git_repo %>
+        <%= source_form.text_field :git_repo %>
+      </div>
+
+      <div class="field">
+        <%= source_form.label :git_ref %>
+        <%= source_form.text_field :git_ref %>
+      </div>
+      <%= button_tag "Select Existing Kernel Source", type: "button", id: "show_source_dropdown", class: "btn btn-secondary" %>
     </div>
-    <%= button_tag "Select Existing Kernel Source",type: "button", id: "show_source_dropdown", class: "btn btn-secondary" %>
-  </div>
+  <% end %>
 
   <div class="actions mt-4">
-    <%= form.submit "Create Kernel Build", class: "btn btn-lg btn-primary" %>
+    <%= form.submit "Submit Kernel Build", class: "btn btn-lg btn-primary" %>
   </div>
 <% end %>
