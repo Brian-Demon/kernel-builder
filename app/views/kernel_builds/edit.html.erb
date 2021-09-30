@@ -3,6 +3,6 @@
 <h3>Current Info:<h3>
 <%= render 'shared/kernel_info', kernel_build: @kernel_build %>
 <h2>Editing Kernel Build</h2>
-<%= render 'shared/edit_form', kernel_build: @kernel_build %>
+<%= render 'form', kernel_build: @kernel_build %>
 
 <%= button_to 'Back', root_path, method: :get, class: "btn btn-secondary" %>
