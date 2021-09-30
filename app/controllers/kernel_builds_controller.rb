@@ -1,8 +1,10 @@
 class KernelBuildsController < ApplicationController
   before_action :require_user_logged_in!
   before_action :set_kernel_build, only: %i[ show edit update destroy ]
-  before_action :set_user_kernel_configs
-  before_action :set_user_kernel_sources
+  before_action :set_user_kernel_configs, only: [:new, :edit]
+  before_action :set_user_kernel_sources, only: [:new, :edit]
+  before_action :load_kernel_config, only: [:create, :update]
+  before_action :load_kernel_source, only: [:create, :update]
 
   # GET /kernel_builds or /kernel_builds.json
   def index
@@ -25,25 +27,10 @@ class KernelBuildsController < ApplicationController
 
   # POST /kernel_builds or /kernel_builds.json
   def create
-    if params["kernel_config"]["id"].present?
-      kernel_config = KernelConfig.find(params["kernel_config"]["id"])
-    else
-      config_url = params["kernel_build"]["config_url"]
-      kernel_config = KernelConfig.new(config_url: config_url, user: current_user)
-    end
-
-    if params["kernel_source"]["id"].present?
-      kernel_source = KernelSource.find(params["kernel_source"]["id"])
-    else
-      git_repo = params["kernel_build"]["git_repo"]
-      git_ref = params["kernel_build"]["git_ref"]
-      kernel_source = KernelSource.new(git_repo: git_repo, git_ref: git_ref, user: current_user)
-    end
-
     @kernel_build = KernelBuild.new(
       user: current_user,
-      kernel_config: kernel_config,
-      kernel_source: kernel_source,
+      kernel_config: @kernel_config,
+      kernel_source: @kernel_source,
     )
 
     respond_to do |format|
@@ -60,7 +47,7 @@ class KernelBuildsController < ApplicationController
   # PATCH/PUT /kernel_builds/1 or /kernel_builds/1.json
   def update
     respond_to do |format|
-      if @kernel_build.update(kernel_build_params)
+      if @kernel_build.update(kernel_source: @kernel_source, kernel_config: @kernel_config)
         format.html { redirect_to @kernel_build, notice: "Kernel build was successfully updated." }
         format.json { render :show, status: :ok, location: @kernel_build }
       else
@@ -97,5 +84,24 @@ class KernelBuildsController < ApplicationController
 
     def set_user_kernel_sources
       @current_user_kernel_sources ||= current_user.kernel_sources.distinct
+    end
+
+    def load_kernel_config
+      if params["kernel_config"]["id"].present?
+        @kernel_config = KernelConfig.find(params["kernel_config"]["id"])
+      else
+        @config_url = params["kernel_config"]["config_url"]
+        @kernel_config = KernelConfig.new(config_url: @config_url, user: current_user)
+      end
+    end
+
+    def load_kernel_source
+      if params["kernel_source"]["id"].present?
+        @kernel_source = KernelSource.find(params["kernel_source"]["id"])
+      else
+        git_repo = params["kernel_source"]["git_repo"]
+        git_ref = params["kernel_source"]["git_ref"]
+        @kernel_source = KernelSource.new(git_repo: git_repo, git_ref: git_ref, user: current_user)
+      end
     end
 end
